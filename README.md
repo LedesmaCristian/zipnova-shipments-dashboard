@@ -64,5 +64,6 @@ src/
 ## Con más tiempo
 
 - Backend o persistencia, y deshacer la última acción.
+- Posición de cada vehículo en el mapa y hacia dónde va. Necesita un backend que reciba el GPS de los conductores: simularlo sin datos reales mostraría recorridos falsos.
 - Clustering de marcadores y virtualización del listado para volúmenes grandes.
 - Tests end-to-end con Playwright.
