@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+/*
+ * Design tokens del UI Kit (Figma → variables). Los nombres siguen los del kit
+ * para que la traducción diseño ↔ código sea directa: `bg-surface-02`, `rounded-xl`, etc.
+ */
+@theme {
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand */
+  --color-brand: #14efb6;
+
+  /* Backgrounds */
+  --color-bg-accent: #172937; /* navbar, botones de herramientas */
+  --color-surface-01: #1e2f3d;
+  --color-surface-02: #2e3e4b;
+  --color-input: #233441; /* inputs, fila de tabla, fondo de menús */
+  --color-row-hover: #2e3e4b;
+  --color-scroll: #354551;
+
+  /* Feedback y prioridades (no están en el kit: errores, acciones destructivas, prioridad media) */
+  --color-danger: #ff6b6b;
+  --color-warning: #f5b84c;
+
+  /* Borders */
+  --color-border: #45545f;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c5cddd;
+  --color-placeholder: #8b949b;
+  --color-disabled: #5d6973;
+  --color-on-brand: #172937;
+
+  /* Tipografía: TextTiny, TextSmall, TextSystem/inputs, TextRegular */
+  --text-tiny: 11px;
+  --text-tiny--line-height: 1.3;
+  --text-small: 13px;
+  --text-small--line-height: 16px;
+  --text-field: 13px;
+  --text-field--line-height: 22px;
+  --text-regular: 16px;
+  --text-regular--line-height: 1.3;
+
+  /* Radios del kit (border-radius-s … 4xl) */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-4xl: 40px;
+
+  /* Sombra de menús flotantes */
+  --shadow-popover: -4px 6px 7px rgb(23 41 55 / 0.8);
+}
+
+/* Anillo de foco de teclado, compartido por todos los controles. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-brand);
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-bg-accent font-sans font-light text-text-primary antialiased;
+  }
+
+  /* Scrollbar del kit: thumb fino y redondeado */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-scroll) transparent;
+  }
+}
+
+/*
+ * Leaflet con los colores del kit. Va fuera de @layer a propósito: el CSS de Leaflet
+ * no tiene capa y le ganaría a cualquier regla dentro de una. El prefijo
+ * `:root .leaflet-container` supera la especificidad de sus selectores, sin depender
+ * del orden de carga (el CSS de Leaflet llega después, con el chunk lazy del mapa).
+ */
+:root .leaflet-container {
+  @apply bg-surface-01 font-sans;
+}
+/* Tiles claros de OSM invertidos y desaturados para acompañar el tema oscuro */
+:root .leaflet-container .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) saturate(0.35) brightness(0.85) contrast(0.9);
+}
+:root .leaflet-container .leaflet-tooltip {
+  @apply rounded-m border-border bg-input text-tiny text-text-primary shadow-popover;
+}
+:root .leaflet-container .leaflet-tooltip-top::before {
+  @apply border-t-border;
+}
+:root .leaflet-container .leaflet-bar a,
+:root .leaflet-container .leaflet-bar a:hover {
+  @apply border-border bg-input text-text-primary;
+}
+:root .leaflet-container .leaflet-bar a:hover {
+  @apply bg-row-hover;
+}
+:root .leaflet-container .leaflet-control-attribution {
+  @apply bg-bg-accent/80 text-placeholder;
+}
+:root .leaflet-container .leaflet-control-attribution a {
+  @apply text-text-secondary;
+}
