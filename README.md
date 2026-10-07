@@ -23,6 +23,24 @@ No hay backend: el store arranca con datos mock (20 envíos, 5 conductores y 5 v
 - **Búsqueda y filtros** combinables por estado, prioridad, conductor, dirección y fecha, con chips para quitarlos.
 - **Acciones** según el estado del envío: asignar conductor y vehículo (valida capacidad), iniciar viaje, marcar entregado, desasignar y cancelar (con confirmación).
 
+## Componentes del UI Kit
+
+Viven en `src/components/ui` y no conocen el dominio.
+
+- **Multi-select con búsqueda** (`MultiSelect`): estados cerrado, abierto, con búsqueda con y sin resultados, y opciones seleccionadas. Incluye "Select all". Es un combobox ARIA: se navega con flechas, Enter y Escape, y solo se puede escribir mientras está abierto.
+- **Filtro con submenús** (`FilterButton` + `Menu`): un botón abre el menú y cada entrada despliega un submenú, con buscador de dirección o con date picker.
+- **Date picker** (`DatePicker`): navegación por mes, día seleccionado, hoy y días con entregas marcados. Al elegir un día de un mes vecino, el calendario pasa a ese mes.
+- **Card de envío colapsable** (`ShipmentCard`).
+- También: `Button`, `IconButton`, `Checkbox`, `Chip`, `Dialog`, `Toast` y `SearchInput`.
+
+## Accesibilidad
+
+Roles ARIA en el multi-select (`combobox`, `listbox`, `aria-activedescendant`), navegación completa con teclado, anillo de foco visible en todos los controles y diálogos con `<dialog>` nativo.
+
+## Tests
+
+Vitest + Testing Library sobre el dominio (máquina de estados y reglas), los selectores, los reducers y los componentes. Hay un mínimo del 80% y hoy la cobertura es de ~91% de líneas. El mapa (react-leaflet) queda fuera de los tests porque Leaflet necesita un navegador real.
+
 ## Stack
 
 React 19 · TypeScript (strict) · Vite · Tailwind CSS 4 · Redux Toolkit · React Hook Form · react-leaflet + OpenStreetMap · Vitest + Testing Library.
