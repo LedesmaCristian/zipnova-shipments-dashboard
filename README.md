@@ -37,9 +37,17 @@ Viven en `src/components/ui` y no conocen el dominio.
 
 Roles ARIA en el multi-select (`combobox`, `listbox`, `aria-activedescendant`), navegación completa con teclado, anillo de foco visible en todos los controles y diálogos con `<dialog>` nativo.
 
-## Tests
+## Tests y calidad
 
-Vitest + Testing Library sobre el dominio (máquina de estados y reglas), los selectores, los reducers y los componentes. Hay un mínimo del 80% y hoy la cobertura es de ~91% de líneas. El mapa (react-leaflet) queda fuera de los tests porque Leaflet necesita un navegador real.
+Vitest + Testing Library sobre el dominio (máquina de estados y reglas), los selectores, los reducers y los componentes. El mínimo exigido es 80% y la CI lo verifica.
+
+| Statements | Branches | Funciones | Líneas |
+| ---------- | -------- | --------- | ------ |
+| 89,8%      | 89,0%    | 91,8%     | 91,5%  |
+
+El mapa (react-leaflet) queda fuera de los tests, con 0%, porque Leaflet necesita un navegador real.
+
+Lighthouse sobre el build de producción (`pnpm build && pnpm preview`, escritorio): Accessibility 100, Best Practices 100, SEO 92.
 
 ## Stack
 
