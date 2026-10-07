@@ -94,6 +94,7 @@ export function MultiSelect<T extends string>({
             aria-activedescendant={activeIndex >= 0 ? optionId(activeIndex) : undefined}
             autoComplete="off"
             value={isOpen ? query : summary}
+            readOnly={!isOpen}
             placeholder={isOpen ? 'Buscar' : placeholder}
             onClick={select.open}
             onChange={(event) => select.updateQuery(event.target.value)}

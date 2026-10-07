@@ -38,6 +38,16 @@ function setup(initial: Status[] = []) {
 }
 
 describe('MultiSelect', () => {
+  it('does not allow typing while closed', async () => {
+    const { user, input } = setup(['pending'])
+
+    await user.tab()
+    await user.keyboard('a')
+
+    expect(input).toHaveValue('Pendiente')
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+  })
+
   it('does not open just by tabbing through it', async () => {
     const { user, input } = setup()
 

@@ -46,6 +46,12 @@ export function DatePicker({
   const isSelectedInView =
     selectedMonth?.year === visibleMonth.year && selectedMonth.month === visibleMonth.month
 
+  // Elegir un día de un mes vecino lleva el calendario a ese mes.
+  const handleSelect = (day: CalendarDay) => {
+    if (!day.isCurrentMonth) setVisibleMonth(getCalendarMonth(fromDateKey(day.key)))
+    onChange(day.key)
+  }
+
   // Encabezado del kit: "DD / MM / AAAA" con el día seleccionado, o "MM / AAAA".
   const headerParts = [
     ...(isSelectedInView && selectedDate ? [pad(selectedDate.getDate())] : []),
@@ -101,7 +107,7 @@ export function DatePicker({
                     isSelected={day.key === value}
                     isToday={day.key === todayKey}
                     isMarked={markedDates?.has(day.key) ?? false}
-                    onSelect={() => onChange(day.key)}
+                    onSelect={() => handleSelect(day)}
                   />
                 ))}
               </tr>

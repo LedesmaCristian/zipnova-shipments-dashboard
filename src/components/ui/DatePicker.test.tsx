@@ -30,6 +30,16 @@ describe('DatePicker', () => {
     expect(onChange).toHaveBeenCalledWith('2026-07-15')
   })
 
+  it('shows the month of a selected day that belongs to an adjacent month', async () => {
+    const onChange = vi.fn()
+    render(<DatePicker value={null} onChange={onChange} today={TODAY} />)
+
+    await userEvent.click(screen.getByRole('button', { name: /\b30 de junio/ }))
+
+    expect(onChange).toHaveBeenCalledWith('2026-06-30')
+    expect(screen.getByLabelText('Mes visible: 06/2026')).toBeInTheDocument()
+  })
+
   it('navigates between months', async () => {
     const user = userEvent.setup()
     render(<DatePicker value={null} onChange={vi.fn()} today={TODAY} />)
