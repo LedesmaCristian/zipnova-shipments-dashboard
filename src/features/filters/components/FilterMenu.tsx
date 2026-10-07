@@ -53,7 +53,7 @@ export function FilterMenu({
       />
 
       {isOpen && (
-        <div className="absolute top-full left-0 z-30 mt-1 flex items-start">
+        <div className="absolute top-full right-0 z-30 mt-1 flex flex-col items-end md:left-0 md:flex-row md:items-start">
           <MenuSurface role="menu" aria-label="Más filtros" className="w-56 shrink-0 p-1">
             <MenuItem
               icon={locateIcon}
@@ -70,8 +70,8 @@ export function FilterMenu({
               onMouseEnter={() => setSubmenu('date')}
             />
           </MenuSurface>
-          {/* Como en el kit: el submenú se abre pegado al menú, a la altura del ítem que lo abrió. */}
-          <div className={cn('-ml-0.5', submenu === 'date' && 'mt-9')}>
+          {/* En pantallas angostas el submenú va debajo del menú. Desde md, como en el kit: pegado al menú, a la altura del ítem que lo abrió. */}
+          <div className={cn('mt-1 md:mt-0 md:-ml-0.5', submenu === 'date' && 'md:mt-9')}>
             {submenu === 'address' && (
               <AddressSubmenu
                 onSelect={(address) => {
