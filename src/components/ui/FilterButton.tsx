@@ -11,7 +11,6 @@ interface FilterButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const ICON_SIZE = 20
 
-/** "Tools button / Filters" del kit: default (gris), hover (blanco) y activo (verde). */
 export function FilterButton({ isActive = false, className, ...props }: FilterButtonProps) {
   return (
     <button

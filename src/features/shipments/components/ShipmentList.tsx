@@ -5,7 +5,6 @@ import { selectVisibleShipments, selectVisibleStats } from '../selectors'
 import { ShipmentDialog } from './ShipmentDialog'
 import { ShipmentListItem } from './ShipmentListItem'
 
-/** Listado de envíos visibles con su resumen. La card expandida es la del envío seleccionado. */
 export function ShipmentList() {
   const shipments = useAppSelector(selectVisibleShipments)
   const stats = useAppSelector(selectVisibleStats)

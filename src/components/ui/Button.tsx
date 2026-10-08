@@ -13,7 +13,6 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   danger: 'border border-danger/60 text-danger hover:bg-danger/10',
 }
 
-/** Botón de texto con las variantes del panel (acción principal, secundaria y destructiva). */
 export function Button({
   variant = 'secondary',
   className,
